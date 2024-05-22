@@ -17,21 +17,19 @@ func NewAdapter(cfg *config.Config) *Resolver {
 	}
 }
 
-func (a *Resolver) Resolve() *container.Container {
-
-	a.resolveDBAdapters()
-	a.resolveRepositories()
+func (r *Resolver) Resolve() *container.Container {
+	r.resolveDBAdapters()
+	r.resolveRepositories()
 
 	return &container.Container{
-		Adapters:     a.Adapters,
-		Repositories: a.Repositories,
+		Adapters:     r.Adapters,
+		Repositories: r.Repositories,
 	}
 }
 
-func (a *Resolver) resolveDBAdapters() {
-
-	httpCient := resolveHttpClientAdapter(a.Config.Service)
-	a.Adapters = container.Adapters{
-		HttpClient: httpCient,
+func (r *Resolver) resolveDBAdapters() {
+	httpCient := resolveHTTPClientAdapter(r.Config)
+	r.Adapters = container.Adapters{
+		HTTPClient: httpCient,
 	}
 }

@@ -15,5 +15,5 @@ type Repositories struct {
 }
 
 type Adapters struct {
-	HttpClient *http.Client
+	HTTPClient *http.Client
 }

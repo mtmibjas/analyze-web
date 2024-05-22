@@ -20,10 +20,10 @@ func NewDataController(ctr *container.Container) *DataController {
 	}
 }
 
-func (d *DataController) GetUrlData(c echo.Context) error {
+func (d *DataController) GetURLData(c echo.Context) error {
 	url := c.FormValue("url")
-	result := d.DataServices.GetUrlData(url)
-	return c.Render(http.StatusOK, "index.html", map[string]interface{}{
+	result := d.DataServices.GetURLData(url)
+	return c.Render(http.StatusOK, "index.html", map[string]any{
 		"result": result,
 	})
 }

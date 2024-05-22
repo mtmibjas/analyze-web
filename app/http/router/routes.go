@@ -10,7 +10,7 @@ import (
 	"github.com/labstack/echo/v4/middleware"
 )
 
-func Init(cfg *config.Config, container *container.Container) *echo.Echo {
+func Init(cfg *config.Config, ctr *container.Container) *echo.Echo {
 
 	e := echo.New()
 
@@ -21,8 +21,7 @@ func Init(cfg *config.Config, container *container.Container) *echo.Echo {
 	e.GET("/healthcheck", func(c echo.Context) error {
 		return c.String(http.StatusOK, " I'm breathing..")
 	})
-	dc := controller.NewDataController(container)
-	e.GET("/", dc.GetUrlData)
+	dc := controller.NewDataController(ctr)
+	e.GET("/", dc.GetURLData)
 	return e
-
 }

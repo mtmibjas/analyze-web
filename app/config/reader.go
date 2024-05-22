@@ -11,7 +11,6 @@ import (
 )
 
 func read(file string) []byte {
-
 	content, err := os.ReadFile(file)
 	if err != nil {
 		panic(fmt.Sprintf("error: %v", err))
@@ -19,8 +18,7 @@ func read(file string) []byte {
 
 	return content
 }
-func parseConfig(file string, unpacker interface{}) {
-
+func parseConfig(file string, unpacker any) {
 	content := read(file)
 	err := yaml.Unmarshal(content, unpacker)
 	if err != nil {

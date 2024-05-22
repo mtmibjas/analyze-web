@@ -1,6 +1,6 @@
 package usecases
 
-func (s *Service) GetUrlData(url string) interface{} {
+func (s *Service) GetURLData(url string) any {
 
 	return nil
 }

@@ -15,12 +15,12 @@ import (
 
 func Run(cfg *config.Config, ctr *resolver.Resolver) *http.Server {
 	container := ctr.Resolve()
-	router := router.Init(cfg, container)
-	router.Logger.Fatal(router.Start(":" + strconv.Itoa(cfg.Service.Port)))
+	route := router.Init(cfg, container)
+	route.Logger.Fatal(route.Start(":" + strconv.Itoa(cfg.Service.Port)))
 
 	srv := &http.Server{
 		Addr:    ":" + strconv.Itoa(cfg.Service.Port),
-		Handler: router,
+		Handler: route,
 		// good practice to set timeouts to avoid Slowloris attacks
 		WriteTimeout: time.Second * 15,
 		ReadTimeout:  time.Second * 15,
@@ -40,7 +40,8 @@ func Run(cfg *config.Config, ctr *resolver.Resolver) *http.Server {
 }
 
 func Stop(ctx context.Context, srv *http.Server) {
-
 	fmt.Println("Service shutting down...")
-	srv.Shutdown(ctx)
+	if err := srv.Shutdown(ctx); err != nil {
+		log.Fatalf("server forced to shutdown: %v", err)
+	}
 }

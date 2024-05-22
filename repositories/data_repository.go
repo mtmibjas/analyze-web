@@ -1,8 +1,8 @@
 package repositories
 
-func (dr *DataRepository) GetUrlData() {
+func (dr *DataRepository) GetURLData() {
 
 	go func() {
-		//data := dr.HttpClient.get()
+		// data := dr.HTTPClient.get()
 	}()
 }

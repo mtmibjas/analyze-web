@@ -6,8 +6,8 @@ import (
 	"time"
 )
 
-func resolveHttpClientAdapter(cfg config.ServiceConfig) *http.Client {
+func resolveHTTPClientAdapter(cfg *config.Config) *http.Client {
 	return &http.Client{
-		Timeout: time.Duration(cfg.Timeout) * time.Second,
+		Timeout: time.Duration(cfg.Service.Timeout) * time.Second,
 	}
 }

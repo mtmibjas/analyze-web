@@ -9,8 +9,8 @@ type Service struct {
 	DataRepository repositories.DataRepositoriesInterface
 }
 
-func NewDataService(container *container.Container) *Service {
+func NewDataService(ctr *container.Container) *Service {
 	return &Service{
-		DataRepository: container.Repositories.DataRepository,
+		DataRepository: ctr.Repositories.DataRepository,
 	}
 }

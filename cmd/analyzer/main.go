@@ -16,7 +16,7 @@ func main() {
 	// Init Config
 	cfg := config.Parse("/config")
 
-	//tp := tracer.ExposeTracer(cfg)
+	// tp := tracer.ExposeTracer(cfg)
 	ctr := resolver.NewAdapter(cfg)
 	srv := server.Run(cfg, ctr)
 
@@ -30,14 +30,13 @@ func main() {
 
 	var wait time.Duration = 10 * time.Second
 	ctx, cancel := context.WithTimeout(context.Background(), wait)
-	defer cancel()
 
 	// gracefully stop the server
 	server.Stop(ctx, srv)
-	//tracer.Stop(ctx, tp)
+	// tracer.Stop(ctx, tp)
 
 	<-ctx.Done()
 	log.Println("server exiting...")
+	cancel()
 	os.Exit(0)
-
 }

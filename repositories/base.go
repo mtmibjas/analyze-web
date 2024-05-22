@@ -7,11 +7,11 @@ import (
 )
 
 type DataRepository struct {
-	HttpClient *http.Client
+	HTTPClient *http.Client
 }
 
 func NewDataRepository(c *config.Config, a *container.Adapters) *DataRepository {
 	return &DataRepository{
-		HttpClient: a.HttpClient,
+		HTTPClient: a.HTTPClient,
 	}
 }
