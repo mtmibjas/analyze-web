@@ -5,6 +5,7 @@ go 1.21.6
 require gopkg.in/yaml.v2 v2.4.0
 
 require (
+	github.com/andybalholm/cascadia v1.3.2 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/kr/pretty v0.3.1 // indirect
@@ -20,6 +21,8 @@ require (
 )
 
 require (
+	github.com/PuerkitoBio/goquery v1.9.2
+	github.com/labstack/echo v3.3.10+incompatible
 	github.com/labstack/echo/v4 v4.12.0
 	golang.org/x/crypto v0.22.0 // indirect
 	golang.org/x/net v0.24.0 // indirect

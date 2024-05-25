@@ -21,8 +21,13 @@ func NewDataController(ctr *container.Container) *DataController {
 }
 
 func (d *DataController) GetURLData(c echo.Context) error {
-	url := c.FormValue("url")
-	result := d.DataServices.GetURLData(url)
+	urlStr := c.FormValue("url")
+
+	result, err := d.DataServices.GetURLData(urlStr)
+	if err != nil {
+
+	}
+
 	return c.Render(http.StatusOK, "index.html", map[string]any{
 		"result": result,
 	})
