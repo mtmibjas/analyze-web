@@ -1,6 +1,7 @@
 package repositories
 
 import (
+	"analyze-web/pkg/logger/zap"
 	"fmt"
 	"net/http"
 
@@ -11,22 +12,20 @@ func (dr *DataRepository) GetURLData(url string) (*goquery.Document, error) {
 
 	resp, err := dr.HTTPClient.Get(url)
 	if err != nil {
+		zap.Error("repo:GetURLData:", err)
 		return nil, err
 	}
-	// content, err := io.ReadAll(resp.Body)
-	// if err != nil {
-	// 	return nil, err
-	// }
+
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("failed to fetch URL: %s", resp.Status)
+		err = fmt.Errorf("failed to fetch URL: %s", resp.Status)
+		zap.Error("repo:GetURLData:", err)
+		return nil, err
 	}
-	// if _, err := html.Parse(resp.Body); err != nil {
-	// 	fmt.Println("sfdsfs")
-	// }
 	doc, err := goquery.NewDocumentFromReader(resp.Body)
 	if err != nil {
+		zap.Error("repo:GetURLData:", err)
 		return nil, err
 	}
 

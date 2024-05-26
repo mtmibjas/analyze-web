@@ -3,6 +3,7 @@ package usecases
 import (
 	"analyze-web/domain"
 	"analyze-web/domain/entities"
+	"analyze-web/pkg/logger/zap"
 	"fmt"
 	"net/url"
 	"strings"
@@ -14,6 +15,7 @@ import (
 func (s *Service) GetURLData(urlStr string) (*entities.URLData, error) {
 	res, err := s.DataRepository.GetURLData(urlStr)
 	if err != nil {
+		zap.Error("usecase:GetURLData:", err)
 		return nil, err
 	}
 	htmlChan := s.getHTMLVersion(res)
@@ -27,7 +29,7 @@ func (s *Service) GetURLData(urlStr string) (*entities.URLData, error) {
 	headings := <-headingChan
 	links := <-linksChan
 	loginForm := <-loginFormChan
-
+	zap.Info("usecase:GetURLData:", "sucessfully fetch data!")
 	return &entities.URLData{
 		HTMLVersion:       hTMLVersion,
 		Title:             title,

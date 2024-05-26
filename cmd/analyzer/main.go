@@ -18,7 +18,6 @@ func main() {
 	cfg := config.Parse("/config")
 	loggger := zap.NewLogger(cfg)
 	loggger.Init()
-	zap.Debug("dafa")
 	ctr := resolver.NewAdapter(cfg)
 	srv := server.Run(cfg, ctr)
 

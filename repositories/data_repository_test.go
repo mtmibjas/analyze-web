@@ -39,17 +39,6 @@ func TestGetURLData_HTTPError(t *testing.T) {
 	assert.Contains(t, err.Error(), "failed to fetch URL")
 }
 
-// func TestGetURLData_InvalidHTML(t *testing.T) {
-// 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-// 		fmt.Fprint(w, `Invalid HTML`)
-// 	}))
-// 	defer ts.Close()
-
-// 	res, err := dr.GetURLData(ts.URL)
-// 	assert.Error(t, err)
-// 	assert.Nil(t, res)
-// }
-
 func TestGetURLData_NotFound(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		http.NotFound(w, r)
