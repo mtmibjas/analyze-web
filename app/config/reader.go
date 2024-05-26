@@ -26,6 +26,20 @@ func parseConfig(file string, unpacker any) {
 	}
 }
 
+func parseLogger(file string, unpacker any) {
+	data, err := os.ReadFile(file)
+	if err != nil {
+		fmt.Println("Error reading file:", err)
+		return
+	}
+
+	err = yaml.Unmarshal(data, unpacker)
+	if err != nil {
+		fmt.Println("Error unmarshalling YAML:", err)
+		return
+	}
+}
+
 func getDirPath(dir string) string {
 	c := dir[len(dir)-1]
 	if os.IsPathSeparator(c) {

@@ -15,8 +15,11 @@ func TestHTMLVersion(t *testing.T) {
 		html     string
 		expected string
 	}{
-		{"<!DOCTYPE html><html></html>", "HTML5"},
-		{"<!DOCTYPE something><html></html>", "Unknown"},
+		{`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html></html>`, "HTML 4"},
+		{`<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN"><html></html>`, "HTML 3"},
+		{`<!DOCTYPE PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"><html></html>`, "XHTML 1"},
+		{`<!DOCTYPE html><html></html>`, "HTML5"},
+		{`<!DOCTYPE something><html></html>`, "unknown"},
 	}
 
 	for _, test := range tests {
@@ -70,11 +73,6 @@ func TestLinkAnalysis(t *testing.T) {
 	`
 	res, err := goquery.NewDocumentFromReader(strings.NewReader(html))
 	assert.NoError(t, err)
-	// server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-	// 	w.WriteHeader(http.StatusOK)
-	// 	w.Write([]byte(html))
-	// }))
-	//defer server.Close()
 
 	result := <-service.processLinks(res)
 

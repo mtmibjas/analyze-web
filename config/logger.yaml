@@ -1,1 +1,60 @@
-log: tracer
+logs:
+  - level: debug
+    file:
+      path: /web-analyzer.
+      name: debug.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: info
+    file:
+      path: /web-analyzer.
+      name: info.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: error
+    file:
+      path: /web-analyzer.
+      name: error.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: fatal
+    file:
+      path: /web-analyzer.
+      name: fatal.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: warn
+    file:
+      path: /web-analyzer.
+      name: warn.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false
+
+  - level: panic
+    file:
+      path: /web-analyzer.
+      name: panic.log
+    rotation:
+      max_size: 1
+      max_backups: 5
+      max_age: 30
+      compress: false

@@ -15,6 +15,24 @@ type ServiceConfig struct {
 	Timeout         int    `yaml:"timeout"`
 }
 
+type LogRotation struct {
+	MaxSize    int  `yaml:"max_size"`
+	MaxBackups int  `yaml:"max_backups"`
+	MaxAge     int  `yaml:"max_age"`
+	Compress   bool `yaml:"compress"`
+}
+
+type LogFile struct {
+	Path string `yaml:"path"`
+	Name string `yaml:"name"`
+}
+
+type LogConfig struct {
+	Level    string      `yaml:"level"`
+	File     LogFile     `yaml:"file"`
+	Rotation LogRotation `yaml:"rotation"`
+}
+
 type LoggerConfig struct {
-	Log any `yaml:"log"`
+	Logs []LogConfig `yaml:"logs"`
 }

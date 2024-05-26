@@ -4,6 +4,7 @@ import (
 	"analyze-web/app/config"
 	"analyze-web/app/resolver"
 	"analyze-web/app/server"
+	"analyze-web/pkg/logger/zap"
 	"context"
 	"log"
 	"os"
@@ -15,8 +16,9 @@ import (
 func main() {
 	// Init Config
 	cfg := config.Parse("/config")
-
-	// tp := tracer.ExposeTracer(cfg)
+	loggger := zap.NewLogger(cfg)
+	loggger.Init()
+	zap.Debug("dafa")
 	ctr := resolver.NewAdapter(cfg)
 	srv := server.Run(cfg, ctr)
 

@@ -12,7 +12,6 @@ import (
 )
 
 func (s *Service) GetURLData(urlStr string) (*entities.URLData, error) {
-
 	res, err := s.DataRepository.GetURLData(urlStr)
 	if err != nil {
 		return nil, err
@@ -38,7 +37,6 @@ func (s *Service) GetURLData(urlStr string) (*entities.URLData, error) {
 		InaccessibleLinks: links.Inaccessible,
 		ContainsLoginForm: loginForm,
 	}, nil
-
 }
 
 func (s *Service) getHTMLVersion(res *goquery.Document) <-chan string {
@@ -47,16 +45,32 @@ func (s *Service) getHTMLVersion(res *goquery.Document) <-chan string {
 		defer close(ch)
 
 		for _, n := range res.Nodes {
-			if n.Type == html.DoctypeNode {
-				if strings.Contains(n.Data, "html") {
-					ch <- "HTML5"
+			if n.FirstChild != nil && n.FirstChild.Type == html.DoctypeNode {
+				docData := n.FirstChild.Data
+				if docData == "html" {
+					if len(n.FirstChild.Attr) > 0 {
+						doctype := n.FirstChild.Attr[0].Val
+						switch {
+						case strings.Contains(doctype, "HTML 4"):
+							ch <- "HTML 4"
+						case strings.Contains(doctype, "HTML 3"):
+							ch <- "HTML 3"
+						default:
+							ch <- "unknown"
+						}
+					} else {
+						ch <- "HTML5"
+					}
 					return
 				}
-				break
+				if docData == "public" {
+					ch <- "XHTML 1"
+					return
+				}
 			}
 		}
-		ch <- "UNKNOWN"
 
+		ch <- "unknown"
 	}()
 	return ch
 }
@@ -112,7 +126,7 @@ func (s *Service) processLinks(res *goquery.Document) <-chan domain.LinkChan {
 				return
 			}
 
-			linkURL, err := url.Parse(link)
+			linkURL, err := url.ParseRequestURI(link)
 			if err != nil {
 				inaccessibleLinks++
 				return

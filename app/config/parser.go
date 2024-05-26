@@ -29,6 +29,6 @@ func validateAppConfig(cfg *ServiceConfig) {
 }
 func parseLoggerConfig(dir string) LoggerConfig {
 	log := LoggerConfig{}
-	parseConfig(dir+"logger.yaml", &log)
+	parseLogger(dir+"logger.yaml", &log)
 	return log
 }

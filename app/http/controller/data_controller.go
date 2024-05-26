@@ -5,7 +5,10 @@ import (
 	"analyze-web/app/http/response"
 	"analyze-web/app/http/validator"
 	"analyze-web/domain/usecases"
+	"errors"
 	"net/http"
+
+	"analyze-web/pkg/logger/zap"
 
 	"github.com/labstack/echo/v4"
 )
@@ -23,6 +26,8 @@ func NewDataController(ctr *container.Container) *DataController {
 }
 
 func (d *DataController) HomeHandler(c echo.Context) error {
+	zap.Debug("runner", "test")
+	zap.Error("ada", errors.New("sdfs"))
 	return c.Render(http.StatusOK, "index.html", map[string]interface{}{})
 }
 

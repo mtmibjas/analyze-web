@@ -5,7 +5,5 @@ import (
 )
 
 func Send(c echo.Context, status int, result map[string]any) error {
-	return c.Render(status, "index.html", map[string]any{
-		"result": result,
-	})
+	return c.Render(status, "index.html", result)
 }
