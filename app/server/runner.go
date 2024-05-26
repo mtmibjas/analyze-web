@@ -19,9 +19,8 @@ func Run(cfg *config.Config, ctr *resolver.Resolver) *http.Server {
 	route.Logger.Fatal(route.Start(":" + strconv.Itoa(cfg.Service.Port)))
 
 	srv := &http.Server{
-		Addr:    ":" + strconv.Itoa(cfg.Service.Port),
-		Handler: route,
-		// good practice to set timeouts to avoid Slowloris attacks
+		Addr:         ":" + strconv.Itoa(cfg.Service.Port),
+		Handler:      route,
 		WriteTimeout: time.Second * 15,
 		ReadTimeout:  time.Second * 15,
 		IdleTimeout:  time.Second * 60,

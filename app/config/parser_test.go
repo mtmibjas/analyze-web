@@ -47,7 +47,7 @@ func TestGetConfigDirTailing(t *testing.T) {
 	pathTailing := fmt.Sprintf(".%sconfig%s", s, s)
 
 	// run
-	got := getConfigDir(pathTailing)
+	got := getDirPath(pathTailing)
 
 	// check
 	need := pathTailing
@@ -65,7 +65,7 @@ func TestGetConfigDirNoTailing(t *testing.T) {
 	pathNoTailing := fmt.Sprintf(".%sconfig", s)
 
 	// run
-	got := getConfigDir(pathNoTailing)
+	got := getDirPath(pathNoTailing)
 
 	// check
 	need := pathTailing

@@ -1,6 +1,8 @@
 name: analyze-web 
 mode: DEBUG
-host:
+app_env: DEV
+base_url: http://localhost
+web_path: /web
 port: 5003
 timezone: GMT+0530
 timeout: 5
@@ -8,4 +10,3 @@ metrics:
   enabled: true
   port: 6000
   route: /metrics
-  # asdadad

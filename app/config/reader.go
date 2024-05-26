@@ -26,7 +26,7 @@ func parseConfig(file string, unpacker any) {
 	}
 }
 
-func getConfigDir(dir string) string {
+func getDirPath(dir string) string {
 	c := dir[len(dir)-1]
 	if os.IsPathSeparator(c) {
 		return dir

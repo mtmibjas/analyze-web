@@ -8,10 +8,11 @@ type Config struct {
 type ServiceConfig struct {
 	ServiceName     string `yaml:"name"`
 	BaseURL         string `yaml:"base_url"`
+	WebPath         string `yaml:"web_path"`
 	TracingExporter string `yaml:"tracing_exporter"`
 	AppEnv          string `yaml:"app_env"`
 	Port            int    `yaml:"port"`
-	Timeout         int    `yaml:"time_out"`
+	Timeout         int    `yaml:"timeout"`
 }
 
 type LoggerConfig struct {

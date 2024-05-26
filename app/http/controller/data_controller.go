@@ -2,6 +2,8 @@ package controller
 
 import (
 	"analyze-web/app/container"
+	"analyze-web/app/http/response"
+	"analyze-web/app/http/validator"
 	"analyze-web/domain/usecases"
 	"net/http"
 
@@ -20,15 +22,22 @@ func NewDataController(ctr *container.Container) *DataController {
 	}
 }
 
+func (d *DataController) HomeHandler(c echo.Context) error {
+	return c.Render(http.StatusOK, "index.html", map[string]interface{}{})
+}
+
 func (d *DataController) GetURLData(c echo.Context) error {
 	urlStr := c.FormValue("url")
-
+	if err := validator.ValidateURL(urlStr); err != nil {
+		return response.Error(c, http.StatusBadRequest, err)
+	}
 	result, err := d.DataServices.GetURLData(urlStr)
 	if err != nil {
-
+		return response.Error(c, http.StatusInternalServerError, err)
 	}
 
-	return c.Render(http.StatusOK, "index.html", map[string]any{
-		"result": result,
-	})
+	res := map[string]any{
+		"Result": result,
+	}
+	return response.Send(c, http.StatusOK, res)
 }
