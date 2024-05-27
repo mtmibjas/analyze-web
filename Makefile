@@ -1,5 +1,5 @@
 # Run the application
-run-service:
+run:
 	go run ./cmd/analyzer 
 
 # Run tests for the application
