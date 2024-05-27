@@ -1,9 +1,12 @@
 package repositories
 
 import (
+	"analyze-web/app/config"
+	"analyze-web/pkg/logger/zap"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
+	"os"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -11,6 +14,14 @@ import (
 
 var dr *DataRepository = &DataRepository{
 	HTTPClient: &http.Client{},
+}
+
+func TestMain(m *testing.M) {
+	cfg := config.Parse("/config")
+	loggger := zap.NewLogger(cfg)
+	loggger.Init()
+	code := m.Run()
+	os.Exit(code)
 }
 
 func TestGetURLData_Success(t *testing.T) {

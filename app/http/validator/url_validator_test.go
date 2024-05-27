@@ -1,11 +1,23 @@
 package validator
 
 import (
+	"analyze-web/app/config"
 	"errors"
+	"os"
 	"testing"
+
+	"analyze-web/pkg/logger/zap"
 
 	"github.com/stretchr/testify/assert"
 )
+
+func TestMain(m *testing.M) {
+	cfg := config.Parse("/config")
+	loggger := zap.NewLogger(cfg)
+	loggger.Init()
+	code := m.Run()
+	os.Exit(code)
+}
 
 func TestValidateURL(t *testing.T) {
 	tests := []struct {
