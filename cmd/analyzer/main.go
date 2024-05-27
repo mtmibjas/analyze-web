@@ -34,7 +34,6 @@ func main() {
 
 	// gracefully stop the server
 	server.Stop(ctx, srv)
-	// tracer.Stop(ctx, tp)
 
 	<-ctx.Done()
 	log.Println("server exiting...")
