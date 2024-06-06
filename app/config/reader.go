@@ -41,10 +41,7 @@ func parseLogger(file string, unpacker any) {
 }
 
 func getDirPath(dir string) string {
-	c := dir[len(dir)-1]
-	if os.IsPathSeparator(c) {
-		return dir
-	}
+
 	cmd := exec.Command("go", "list", "-m", "-f", "{{.Dir}}")
 	output, err := cmd.Output()
 	if err != nil {
@@ -53,5 +50,9 @@ func getDirPath(dir string) string {
 	}
 	moduleRoot := strings.TrimSpace(string(output))
 
+	c := dir[len(dir)-1]
+	if os.IsPathSeparator(c) {
+		return moduleRoot + dir
+	}
 	return moduleRoot + dir + string(os.PathSeparator)
 }

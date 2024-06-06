@@ -25,7 +25,7 @@ This is a web application written in Go using the Echo framework that analyzes a
 ## Getting Started
 
 ### Helpful Commands
-- `make run`: Starts the TripManagementService.
+- `make run`: Starts the web analyzer.
 - `make test`: Executes the test suite.
 
 ### Clone the Repository
